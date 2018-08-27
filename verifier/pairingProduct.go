@@ -19,6 +19,22 @@ type G1 = bn256.G1
 // output of an operation, but cannot be used as an input.
 type G2 = bn256.G2
 
+// GT is a pairing group e(G1, G2)
+type GT = bn256.GT
+
+// GTIdentity is e(g1, g2) * 0
+var GTIdentity = new(GT)
+
+// IdentityBytes is e(g1, g2) * 0 serialized
+var IdentityBytes []byte
+
+func init() {
+	GTIdentity = bn256.Miller(GetG1Base(), GetG2Base())
+	GTIdentity.Finalize()
+	GTIdentity.ScalarMult(GTIdentity, big.NewInt(0))
+	IdentityBytes = GTIdentity.Marshal()
+}
+
 // PairingCheck calculates the Optimal Ate pairing for a set of points.
 func PairingCheck(a []*G1, b []*G2) bool {
 	return bn256.PairingCheck(a, b)
