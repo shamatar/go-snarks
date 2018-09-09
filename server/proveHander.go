@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"fmt"
+	"bytes"
 	"math/rand"
 	"net/http"
 	"os/exec"
@@ -69,15 +71,49 @@ func ProveHander(w http.ResponseWriter, r *http.Request) {
 	stringForProver := "b" + fullString
 	salt := rand.Uint64()
 	saltString := strconv.FormatUint(salt, 16)
-	out, err := exec.Command("battleship -p " + stringForProver + " " + saltString).Output()
-	log.Println(string(out))
+//	out, err := exec.Command("./battleship -p " + stringForProver + " " + saltString).Output()
+//	log.Println(string(out))
+	//if cmd, e := exec.Run("./battleship -p", nil, nil, exec.DevNull, exec.Pipe, exec.MergeWithStdout); e == nil {
+       	//	b, _ := ioutil.ReadAll(cmd.Stdout)
+        //	fmt.Println("output: " + string(b))
+        //}
+	cmd := exec.Command("./battleship", "-p", stringForProver, saltString)
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	err = cmd.Run()
+	if err != nil {
+		log.Println(err)
+		writeError(w)
+		return
+	}
+	fmt.Printf("in all caps: %q\n", out.String())
+	testVerifier()
 	fullFile, err := ioutil.ReadFile("proof.txt")
 	if err != nil {
 		writeError(w)
 		return
 	}
 	fullContent := string(fullFile)
-	writeResponse(w, fullContent, string(out))
+	writeResponse(w, fullContent, "")
+}
+
+func testVerifier() {
+        cmd := exec.Command("./battleship", "-v")
+        var out bytes.Buffer
+        cmd.Stdout = &out
+        err := cmd.Run()
+        if err != nil {
+                log.Println(err)
+                return
+        }
+        fmt.Printf("in all caps: %q\n", out.String())
+
+        outString := out.String()
+        log.Println(outString)
+        length := len(outString)
+        result := outString[length-5 : length-1]
+        fmt.Println(result)
+
 }
 
 func writeError(w http.ResponseWriter) {
