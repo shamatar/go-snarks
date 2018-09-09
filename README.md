@@ -35,9 +35,9 @@ That's all for now
 - [ ] produce a salted commitment to position (used further as a public input)
 - [x] create a smart-contract for players to start a game
 - [ ] make a zkSNARK for a state updates, that checks turns one by one
-    - [ ] check whos turn it is not
-    - [ ] check the signature
-    - [ ] check that position under the commitment to position is correct
+    - [ ] check whos turn it is now
+    - [ ] check the signature of the current player (for shooting)
+    - [ ] check that position under the commitment is correct
     - [ ] if there is a "hit" - update the corresponding score
     - [ ] keep the history of shots and don't allow duplicates
     - [ ] update the scores
