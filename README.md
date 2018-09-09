@@ -13,7 +13,7 @@ Other repositories related to this work, developers were working in their own re
 - Backend assembled [here](https://github.com/shamatar/go-snarks) (current repo).
 
 ## Limitations
-Due to a huge pain of building a `libsnark` anywhere but Linux this repo contains a binary assembled under Ubuntu16.04, that is called through the command line(!) from the Go backend. In principle Go backend is ready to verify proofs itself, it's just a matter if pain with proof serialization.
+Due to a huge pain of building a `libsnark` anywhere but Linux this repo contains a binary assembled under Ubuntu16.04, that is called through the command line(!) from the Go backend. In principle Go backend is ready to verify proofs itself, it's just a matter of pain with proof serialization.
 
 ## How to run
 Keep in mind the limitations above!
@@ -50,5 +50,7 @@ Much work to do!
 ## Authors (team)
 
 Alex Vlasov, [shamatar](https://github.com/shamatar)
+
 Konstantin Panarin, [Konstantce](https://github.com/konstantce)
+
 Artem Vorobyev, [artall64](https://github.com/artall64)
