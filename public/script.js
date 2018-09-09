@@ -157,7 +157,7 @@ const sendVerify = async () => {
     const content = await rawResponse.json();
     const verifyLabel = document.getElementById("verificationStatus");
 
-    if(content.verify){
+    if(!content.error){
         verifyLabel.style.color= "green";
         verifyLabel.innerHTML = "Verified";
     }
