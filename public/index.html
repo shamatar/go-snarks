@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sea Battle</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="grid">
+		<div id="gridHead" style="grid-template-rows: 1fr; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">
+			<div class="gridHeadCell">1</div>
+			<div class="gridHeadCell">2</div>
+			<div class="gridHeadCell">3</div>
+			<div class="gridHeadCell">4</div>
+			<div class="gridHeadCell">5</div>
+			<div class="gridHeadCell">6</div>
+			<div class="gridHeadCell">7</div>
+			<div class="gridHeadCell">8</div>
+			<div class="gridHeadCell">9</div>
+			<div class="gridHeadCell">10</div>
+		</div>
+		<div id="gridHeadColumn" style="grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; grid-template-columns: 1fr">
+			<div class="gridHeadCell">a</div>
+			<div class="gridHeadCell">b</div>
+			<div class="gridHeadCell">c</div>
+			<div class="gridHeadCell">d</div>
+			<div class="gridHeadCell">e</div>
+			<div class="gridHeadCell">f</div>
+			<div class="gridHeadCell">g</div>
+			<div class="gridHeadCell">h</div>
+			<div class="gridHeadCell">i</div>
+			<div class="gridHeadCell">j</div>
+		</div>
+		<div id="fieldGame" style="grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">
+		</div>
+	</div>
+	
+	<div id="ships">
+		<div class="ship ship-4v" data-line="vertically" data-size="4" style="grid-template-rows: 1fr 1fr 1fr 1fr; grid-template-columns: 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-4g" data-line="horizontally" data-size="4" style="grid-template-rows: 1fr; grid-template-columns: 1fr 1fr 1fr 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-3v" data-line="vertically" data-size="3" style="grid-template-rows: 1fr 1fr 1fr; grid-template-columns: 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-3g" data-line="horizontally" data-size="3" style="grid-template-rows: 1fr; grid-template-columns: 1fr 1fr 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-2v" data-line="vertically" data-size="2" style="grid-template-rows: 1fr 1fr; grid-template-columns: 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-2g" data-line="horizontally" data-size="2" style="grid-template-rows: 1fr; grid-template-columns: 1fr 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+			<div class="shipCell"></div>
+		</div>
+		<div class="ship ship-1v" data-line="vertically" data-size="1" style="grid-template-rows: 1fr; grid-template-columns: 1fr" onclick="choiceShip(this)">
+			<div class="shipCell"></div>
+		</div>
+	</div>
+
+	<div id="sendLayou">
+		<button id="sendLayoutBtn">Send Layout</button>
+	</div>
+</body>
+    <script src="script.js"></script>
+</html>

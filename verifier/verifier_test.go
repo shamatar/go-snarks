@@ -2,6 +2,7 @@ package verifier
 
 import (
 	"bytes"
+	"fmt"
 	"math/big"
 	"math/rand"
 	"testing"
@@ -484,5 +485,21 @@ func BenchmarkFastVerification(b *testing.B) {
 	witness[5] = big.NewInt(2) // fib 2
 	for i := 0; i < b.N; i++ {
 		agregatedVerification(witness, proof, vk)
+	}
+}
+
+func TestProofParsing(t *testing.T) {
+	proof, err := ParseProofFromFile("proof.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(proof)
+}
+
+func TestLibsnarkVKParsing(t *testing.T) {
+	vk := new(LibsnarkVerifyingKey)
+	err := vk.ParseFromFile("verificationKey.txt")
+	if err != nil {
+		t.Fatal(err)
 	}
 }

@@ -1,0 +1,118 @@
+body {
+	padding: 50px;
+}
+#grid {
+    position: relative;
+	background-color: silver;
+}
+#gridHead, #gridHeadColumn, #fieldGame, .ship {
+	display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1px;
+    overflow: auto;
+    background: #fff;
+}
+#fieldGame {
+    width: 209px;
+    height: 209px;
+}
+#gridHead, #gridHeadColumn {
+    position: absolute;
+}
+#gridHead {
+	width: 209px;
+    height: 21px;
+    top: -21px;
+}
+#gridHeadColumn {
+	height: 209px;
+    width: 21px;
+    left: -21px;
+}
+.gridHeadCell {
+	text-align: center;
+}
+.cell, .shipCell {
+	display: flex; 
+	flex-direction: column;
+	justify-content: center; 
+	background: #4682B4; 
+	opacity: .7;
+	border: 1px; 
+	height: 20px; 
+	width: 20px;
+}
+.shipCell {
+	background: #000;
+}
+.cellHover {
+	background: #000;
+	opacity: .5;
+}
+.cell2 {
+	background: #000;
+}
+.cellHover.cell2 {
+	background: #000;
+	opacity: .8;
+}
+#ships {
+	margin-top: 20px;
+	height: 100px;
+	background-color: aliceblue;
+}
+.ship {
+    margin: 5px;
+    float: left;
+}
+.ship-4v, .ship-3v, .ship-2v, .ship-1v {
+	width: 20px;
+}
+.ship-4g {
+	width: 83px;
+}
+.ship-3g {
+	width: 62px;
+}
+.ship-2g {
+	width: 41px;
+}
+.ship-1v {
+	width: 20px;
+}
+.ship:hover .cell {
+	background: #FF6347;
+	cursor: pointer;
+	transition: .3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
