@@ -8,7 +8,7 @@ let ship = [];	// выделенный на поле корабль
 
 // game field
 const drawGrid = () => {
-    for (var i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++) {
         const cell = document.createElement('div');
         const char = letterArray[i % 10];
         const num = Math.trunc((i) / 10) + 1;
@@ -27,7 +27,7 @@ drawGrid();
 const getAllCells = () => {
     const cellsList = document.querySelectorAll(".cell");
     let allCells = [];
-    for (var i = 0; i < cellsList.length; i++) {
+    for (let i = 0; i < cellsList.length; i++) {
         allCells.push(cellsList[i].getAttribute('id'));
     }
     return allCells;
@@ -97,11 +97,11 @@ const cellOnclick = () => {
 const getLayout = () => {
     let num = 10;
     let char = letterArray;
-    var card = [];
-    for (var i = 0; i < char.length; i++) {
+    let card = [];
+    for (let i = 0; i < char.length; i++) {
         card[i] = [];
-        for (var j = 0; j < num; j++) {
-            const a = document.querySelector('#' + char[i] + (j + 1));
+        for (let j = 0; j < num; j++) {
+            const a = document.querySelector(`#${char[i]}${j + 1}`);
             card[i][j] = a.classList.contains('cell2') ? 1 : 0;
         }
     }
@@ -109,29 +109,62 @@ const getLayout = () => {
 };
 
 
-const sendJSON = (obj) => {
-    (async () => {
-        const rawResponse = await fetch('/prove', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        });
-        console.log(JSON.stringify(obj));
-        const content = await rawResponse.json();
-        console.log(content);
-    })();
+const sendJSON = async (obj) => {
+
+    const rawResponse = await fetch('/prove', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+    return content;
 };
 
 window.onload = () => {
     document.getElementById("sendLayoutBtn").addEventListener("click", sendLayout);
+    document.getElementById("verifyBtn").addEventListener("click", sendVerify);
 };
 
-const sendLayout = () => {
+const sendLayout = async () => {
     const layout = getLayout();
-    sendJSON(layout);
+    const resp = await sendJSON(layout);
+
+    const textArea = document.getElementById("serverResponse");
+    textArea.style.display = "block";
+
+    const verifyBtn = document.getElementById("verifyBtn");
+    verifyBtn.style.display = "block";
+
+    textArea.value = JSON.stringify(resp);
 };
 
+const sendVerify = async () => {
 
+    const textArea = document.getElementById("serverResponse");
+    const rawResponse = await fetch('/verify', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: textArea.value
+    });
+
+    const content = await rawResponse.json();
+    const verifyLabel = document.getElementById("verificationStatus");
+
+    if(content.verify){
+        verifyLabel.style.color= "green";
+        verifyLabel.innerHTML = "Verified";
+    }
+    else {
+        verifyLabel.style.color= "red";
+        verifyLabel.innerHTML = "Verification Failed";
+    }
+
+    return content;
+};
